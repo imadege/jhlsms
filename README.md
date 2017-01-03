@@ -12,6 +12,7 @@ How to use Package
 Example
 
 pip install twilio
+
 pip install git+https://github.com/imadege/jhlsms
 
 import sms
