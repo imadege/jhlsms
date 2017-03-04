@@ -1,11 +1,13 @@
 from twilio.rest import TwilioRestClient
 from django.conf import settings
 
+from AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
+
 class SendMessage():
     """""
         Will use these class to send sms/ check status and queue sending sms
     """
-    Gateways = ["twilio"]
+    Gateways = ["twilio","africastalking"]
     gateway = ""
     number = ""
     message = ""
@@ -24,8 +26,11 @@ class SendMessage():
         if self.gateway is "twilio":
             self.twilio_gateway()
             return "Yes we can send"
+        elif self.gateway is "africastalking":
+            self.africas_talking_gateway()
         else:
             raise ValueError("We cannot send Message now ")
+
 
 
     def twilio_gateway(self):
@@ -38,6 +43,29 @@ class SendMessage():
             body = self.message,
             from_="+16178602872",
         )
+
+    def africas_talking_gateway(self):
+        """"Handle smss sending for africa"""
+        africa_talking_username = settings.AFRICA_TALKING_USERNAME
+        afirca_talking_apiky = settings.AFRICA_TALKING_APIKEY
+        to = "+254724454978"
+        message = self.message
+        gateway = AfricasTalkingGateway(africa_talking_username,afirca_talking_apiky)
+        try:
+            # Thats it, hit send and we'll take care of the rest.
+            results = gateway.sendMessage(to, message)
+
+            for recipient in results:
+                # status is either "Success" or "error message"
+                print 'number=%s;status=%s;messageId=%s;cost=%s' % (recipient['number'],
+                                                                    recipient['status'],
+                                                                    recipient['messageId'],
+                                                                    recipient['cost'])
+        except AfricasTalkingGatewayException, e:
+            print 'Encountered an error while sending: %s' % str(e)
+
+
+
 
     def tuma_gateway(self):
         return  True
