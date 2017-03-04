@@ -34,6 +34,7 @@ class AfricasTalkingGateway:
 		
 
     # Messaging methods
+    # Messaging methods
     def sendMessage(self, to_, message_, from_ = None, bulkSMSMode_ = 1, enqueue_ = 0, keyword_ = None, linkId_ = None, retryDurationInHours_ = None):
         if len(to_) == 0 or len(message_) == 0:
             raise AfricasTalkingGatewayException("Please provide both to_ and message_ parameters")
@@ -295,7 +296,7 @@ class AfricasTalkingGateway:
             self.responseCode = response.getcode()
             response          = ''.join(response.readlines())
             if self.Debug:
-                print "Raw response: " + response
+                print ("Raw response: " + response)
                 
             return response
 
@@ -314,7 +315,7 @@ class AfricasTalkingGateway:
             self.responseCode = response.getcode()
             response          = ''.join(response.readlines())
             if self.Debug:
-                print "Raw response: " + response
+                print ("Raw response: " + response)
                 
             return response
         
