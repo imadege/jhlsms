@@ -59,7 +59,6 @@ class SendMessage():
 
 
 
-
     def tuma_gateway(self):
         return  True
 
