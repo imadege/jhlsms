@@ -1,13 +1,13 @@
 from twilio.rest import TwilioRestClient
 from django.conf import settings
 
-from .AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
+#from .AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
 
 class SendMessage():
     """""
         Will use these class to send sms/ check status and queue sending sms
     """
-    Gateways = ["twilio","africastalking"]
+    Gateways = ["twilio",]
     gateway = ""
     number = ""
     message = ""
@@ -27,7 +27,9 @@ class SendMessage():
             self.twilio_gateway()
             return "Yes we can send"
         elif self.gateway is "africastalking":
-            self.africas_talking_gateway()
+            #self.africas_talking_gateway()
+            raise ValueError("Not Supported")
+
         else:
             raise ValueError("We cannot send Message now ")
 
@@ -44,8 +46,8 @@ class SendMessage():
             from_="+16178602872",
         )
 
-    def africas_talking_gateway(self):
-        """"Handle smss sending for africa"""
+    """def africas_talking_gateway(self):
+        ""Handle smss sending for africa""
         africa_talking_username = settings.AFRICA_TALKING_USERNAME
         afirca_talking_apiky = settings.AFRICA_TALKING_APIKEY
         to = "+254724454978"
@@ -56,7 +58,7 @@ class SendMessage():
             results = gateway.sendMessage(to, message)
         except AfricasTalkingGatewayException as e:
             print ('Encountered an error while sending: %s' % str(e))
-
+    """
 
 
     def tuma_gateway(self):
