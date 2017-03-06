@@ -57,6 +57,7 @@ class SendMessage():
         try:
             # Thats it, hit send and we'll take care of the rest.
             results = gateway.sendMessage(to, message)
+            print(results)
         except AfricasTalkingGatewayException as e:
             print ('Encountered an error while sending: %s' % str(e))
 
