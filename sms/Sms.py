@@ -3,6 +3,7 @@ from django.conf import settings
 
 from AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
 
+
 class SendMessage():
     """""
         Will use these class to send sms/ check status and queue sending sms
@@ -28,6 +29,8 @@ class SendMessage():
             return "Yes we can send"
         elif self.gateway is "africastalking":
             self.africas_talking_gateway()
+            #raise ValueError("Not Supported")
+
         else:
             raise ValueError("We cannot send Message now ")
 
@@ -45,7 +48,7 @@ class SendMessage():
         )
 
     def africas_talking_gateway(self):
-        """"Handle smss sending for africa"""
+        """Handle smss sending for africa"""
         africa_talking_username = settings.AFRICA_TALKING_USERNAME
         afirca_talking_apiky = settings.AFRICA_TALKING_APIKEY
         to = "+254724454978"
