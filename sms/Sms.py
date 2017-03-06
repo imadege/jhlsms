@@ -2,7 +2,7 @@ from twilio.rest import TwilioRestClient
 from django.conf import settings
 
 #from AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
-from  africastalking.AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
+from africastalking.AfricasTalkingGateway import (AfricasTalkingGateway, AfricasTalkingGatewayException)
 
 class SendMessage():
     """""
