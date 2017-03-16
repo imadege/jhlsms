@@ -71,8 +71,10 @@ class SendMessage():
         password = settings.MTECH_PASS
         code = settings.MTECH_SHORT_CODE
         payload = {'user':user, 'pass': 'password','shortCode':code,'MSISDN':self.number,'MESSAGE':self.message}
-        r = requests.get('http://ke.mtechcomm.com/bulkAPIV2/', params = payload)
-        print(r)
+        url  = 'http://ke.mtechcomm.com/bulkAPIV2/'
+        url = url+"?user="+user+"&pass="+password+"&shortCode"+code+"&MSISDN"+self.number+"&MESSAGE="+self.message
+        r = requests.get(url)
+        print(r.content)
         return r
 
     def tuma_gateway(self):
