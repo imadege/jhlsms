@@ -4,11 +4,13 @@ from django.conf import settings
 #from AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
 from africastalking.AfricasTalkingGateway import (AfricasTalkingGateway, AfricasTalkingGatewayException)
 
+import  requests
+
 class SendMessage():
     """""
         Will use these class to send sms/ check status and queue sending sms
     """
-    Gateways = ["twilio","africastalking"]
+    Gateways = ["twilio","africastalking","mtech"]
     gateway = ""
     number = ""
     message = ""
@@ -30,7 +32,8 @@ class SendMessage():
         elif self.gateway is "africastalking":
             self.africas_talking_gateway()
             #raise ValueError("Not Supported")
-
+        elif self.gateway is "mtech":
+            self.mtech_gateway()
         else:
             raise ValueError("We cannot send Message now ")
 
@@ -57,10 +60,19 @@ class SendMessage():
         try:
             # Thats it, hit send and we'll take care of the rest.
             results = gateway.sendMessage(to, message)
-            print(results)
         except AfricasTalkingGatewayException as e:
             print ('Encountered an error while sending: %s' % str(e))
 
+
+
+    """mtech ssms"""
+    def mtech_gateway(self):
+        user = settings.MTECH_USER
+        password = settings.MTECH_PASS
+        code = settings.MTECH_SHORT_CODE
+        payload = {'user':user, 'pass': 'password','shortCode':code,'MSISDN':self.number,'MESSAGE':self.message}
+        r = requests.get('http://ke.mtechcomm.com/bulkAPIV2/', params = payload)
+        return r
 
 
     def tuma_gateway(self):
