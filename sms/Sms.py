@@ -1,4 +1,4 @@
-from twilio.rest import TwilioRestClient
+from twilio.rest import Client
 from django.conf import settings
 
 #from AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
