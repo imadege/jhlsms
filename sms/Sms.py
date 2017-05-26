@@ -43,7 +43,7 @@ class SendMessage():
         """Handle twilio sms sending """
         account_sid = settings.TWILIO_SID
         account_token = settings.TWILIO_TOKEN
-        client = TwilioRestClient(account_sid, account_token)
+        client = Client(account_sid, account_token)
         client.messages.create(
             to = self.number,
             body = self.message,
