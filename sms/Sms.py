@@ -45,10 +45,9 @@ class SendMessage():
         account_token = settings.TWILIO_TOKEN
         client = Client(account_sid, account_token)
         client.messages.create(
-            to = self.number,
-            body = self.message,
-            from = settings.TWILIO_NUMBER
-        )
+              to=self.number,
+              from_=settings.TWILIO_NUMBER,
+              body= self.number)
 
     """def africas_talking_gateway(self):
         "Handle smss sending for africa""
