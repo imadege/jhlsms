@@ -47,7 +47,7 @@ class SendMessage():
         client.messages.create(
             to = self.number,
             body = self.message,
-            from_="+16178602872",
+            from = settings.TWILIO_NUMBER
         )
 
     """def africas_talking_gateway(self):
