@@ -74,7 +74,7 @@ class SendMessage():
         url  = 'http://ke.mtechcomm.com/bulkAPIV2/'
         url = url+"?user="+user+"&pass="+password+"&shortCode="+code+"&MSISDN="+self.number+"&MESSAGE="+self.message
         r = requests.get(url)
-        print(r.content)
+       
         return r
 
     def tuma_gateway(self):
